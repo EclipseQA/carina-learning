@@ -1,8 +1,9 @@
-package com.solvd.api;
+package com.solvd.saucedemo.api;
 
 import com.qaprosoft.apitools.validation.JsonComparatorContext;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
+import com.zebrunner.carina.utils.R;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.testng.annotations.Test;
 
@@ -16,7 +17,7 @@ public class DeleteUserTest implements IAbstractTest {
     @MethodOwner()
     public void testDeleteUserById() {
         DeleteUserMethod deleteUserMethod = new DeleteUserMethod();
-        deleteUserMethod.replaceUrlPlaceholder("id", "1");
+        deleteUserMethod.replaceUrlPlaceholder("id", R.TESTDATA.get("id"));
 
         deleteUserMethod.callAPIExpectSuccess();
 

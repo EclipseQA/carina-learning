@@ -1,4 +1,4 @@
-package com.solvd.api;
+package com.solvd.saucedemo.api;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.zebrunner.agent.core.annotation.TestLabel;

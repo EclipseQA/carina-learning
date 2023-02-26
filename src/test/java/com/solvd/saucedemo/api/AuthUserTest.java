@@ -1,4 +1,4 @@
-package com.solvd.api;
+package com.solvd.saucedemo.api;
 
 import com.qaprosoft.apitools.validation.JsonComparatorContext;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;

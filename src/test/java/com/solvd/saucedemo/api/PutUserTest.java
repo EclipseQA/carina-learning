@@ -1,9 +1,9 @@
-package com.solvd.api;
+package com.solvd.saucedemo.api;
 
-import com.qaprosoft.apitools.validation.JsonComparatorContext;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
+import com.zebrunner.carina.utils.R;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.testng.annotations.Test;
 
@@ -15,7 +15,7 @@ public class PutUserTest implements IAbstractTest {
     @TestLabel(name = "update", value = {"api", "acceptance"})
     public void updateUserByFirstNameAndLastName(){
         PutUserMethod putUserMethod = new PutUserMethod();
-        putUserMethod.replaceUrlPlaceholder("id", "1");
+        putUserMethod.replaceUrlPlaceholder("id",  R.TESTDATA.get("id"));
         putUserMethod.getProperties().remove("email");
 
         putUserMethod.callAPIExpectSuccess();
@@ -29,7 +29,7 @@ public class PutUserTest implements IAbstractTest {
     @TestLabel(name = "update", value = {"api", "acceptance"})
     public void updateUserByLastName(){
         PutUserMethod putUserMethod = new PutUserMethod();
-        putUserMethod.replaceUrlPlaceholder("id", "2");
+        putUserMethod.replaceUrlPlaceholder("id",  R.TESTDATA.get("id"));
         putUserMethod.getProperties().remove("email");
         putUserMethod.getProperties().remove("first_name");
 
@@ -42,7 +42,7 @@ public class PutUserTest implements IAbstractTest {
     @TestLabel(name = "update", value = {"api", "acceptance"})
     public void updateUserByFirstNameAndEmail(){
         PutUserMethod putUserMethod = new PutUserMethod();
-        putUserMethod.replaceUrlPlaceholder("id", "3");
+        putUserMethod.replaceUrlPlaceholder("id",  R.TESTDATA.get("id"));
         putUserMethod.getProperties().remove("last_name");
 
         putUserMethod.callAPIExpectSuccess();

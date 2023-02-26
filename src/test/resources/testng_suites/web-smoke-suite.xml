@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!--thread-count="2" Config already have-->
+<suite name="Smoke Test" parallel="tests" >
+
+    <test name="Positive Test Login">
+        <classes>
+            <class name="com.solvd.saucedemo.web.LoginTest">
+                <methods>
+                    <include name="testLoginWithValidCreds"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Negative Test Login">
+        <classes>
+            <class name="com.solvd.saucedemo.web.LoginTest">
+                <methods>
+                    <exclude name="testLoginWithValidCreds"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Logout Test">
+        <classes>
+            <class name="com.solvd.saucedemo.web.LogoutTest">
+                <methods>
+                    <include name="testLogoutFromShoppingPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Sorting Shopping Page Test">
+        <classes>
+            <class name="com.solvd.saucedemo.web.ShoppingTest">
+                <methods>
+                    <include name="testProductsSortedByPriceDescending"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Add Product To Cart Test">
+        <classes>
+            <class name="com.solvd.saucedemo.web.ShoppingTest">
+                <methods>
+                    <include name="testAddToCartProducts"/>
+                </methods>
+            </class>
+            <class name="com.solvd.saucedemo.web.CartTest">
+                <methods>
+                    <include name="testPresenceAddedItemsInCart"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Delete Product From Cart Test">
+        <classes>
+            <class name="com.solvd.saucedemo.web.ShoppingTest">
+                <methods>
+                    <include name="testDeleteAddedProduct"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Positive Make Order Test">
+        <classes>
+            <class name="com.solvd.saucedemo.web.CheckoutTest">
+                <methods>
+                    <include name="testMakeAnOrderWithValidData"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
