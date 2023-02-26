@@ -1,0 +1,16 @@
+<#assign json = {}>
+<#if first_name??>
+<#assign json += {"firstName": "${first_name}"}>
+</#if>
+<#if last_name??>
+<#assign json += {"lastName": "${last_name}"}>
+</#if>
+<#if email??>
+<#assign json += {"email": "${email}"}>
+</#if>
+
+{
+<#list json as key, value>
+<#if key?has_content>"${key}": "${value}"<#if key_has_next>, </#if></#if>
+</#list>
+}

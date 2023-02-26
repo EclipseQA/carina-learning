@@ -1,0 +1,12 @@
+{
+  "id": "type:Integer",
+  <#if first_name??>"firstName": "${first_name}",</#if>
+  <#if last_name??>"lastName": "${last_name}",</#if>
+  "maidenName": "type:String",
+  "username": "type:String",
+  "age": "regex:[\\d]{1,3}",
+  "gender": "regex:^(male|female)",
+  "birthDate": "regex:[\\d]{4}-[\\d]{2}-[\\d]{2}",
+  <#if email??>"email": "${email}"</#if>
+}
+

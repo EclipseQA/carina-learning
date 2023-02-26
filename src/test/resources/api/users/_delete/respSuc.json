@@ -1,0 +1,7 @@
+{
+  "id": "type:Integer",
+  "firstName": "type:String",
+  "lastName": "type:String",
+  "isDeleted": "ognl:#val.equals(true)",
+  "deletedOn": "predicate:isCurrentTime"
+}

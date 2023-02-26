@@ -1,0 +1,10 @@
+{
+  "id": "type:Integer",
+  "username": "${username}",
+  "email": "predicate:isEmailValid",
+  "firstName": "type:String",
+  "lastName": "type:String",
+  "gender": "predicate:isGenderValid",
+  "image": "predicate:isImageValid",
+  "token": "ognl:!#val.isEmpty() && #this.token instanceof String"
+}
