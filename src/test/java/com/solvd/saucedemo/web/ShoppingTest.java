@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 public class ShoppingTest implements IAbstractTest {
 
@@ -17,11 +18,14 @@ public class ShoppingTest implements IAbstractTest {
     public void testProductsSortedByPriceDescending() {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.open();
-        loginPage.loginWithData(
-                R.TESTDATA.get("valid_username"),
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.USERNAME,
+                R.TESTDATA.get("valid_username"));
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.PASSWORD,
                 R.TESTDATA.get("valid_password"));
 
-        ShoppingPage shoppingPage = new ShoppingPage(getDriver());
+        ShoppingPage shoppingPage = loginPage.login();
         shoppingPage.sortProducts(ShoppingPage.SortProductsType.PRICE_DESC);
 
         List<Float> actualSortedPrices = shoppingPage.getProductsPrices();
@@ -36,27 +40,35 @@ public class ShoppingTest implements IAbstractTest {
     public void testAddToCartProducts() {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.open();
-        loginPage.loginWithData(
-                R.TESTDATA.get("valid_username"),
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.USERNAME,
+                R.TESTDATA.get("valid_username"));
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.PASSWORD,
                 R.TESTDATA.get("valid_password"));
 
-        ShoppingPage shoppingPage = new ShoppingPage(getDriver());
-        shoppingPage.addProductToCart();
+        ShoppingPage shoppingPage = loginPage.login();
+        int expectedAmountOfAddedProducts = new Random().nextInt(5) + 1;
+        shoppingPage.addProductToCart(expectedAmountOfAddedProducts);
 
         Assert.assertEquals(shoppingPage.getActualAmountOfAddedProducts()
-                , shoppingPage.getExpectedAmountOfAddedProducts());
+                , expectedAmountOfAddedProducts);
     }
 
     @Test
     public void testDeleteAddedProduct() {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.open();
-        loginPage.loginWithData(
-                R.TESTDATA.get("valid_username"),
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.USERNAME,
+                R.TESTDATA.get("valid_username"));
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.PASSWORD,
                 R.TESTDATA.get("valid_password"));
 
-        ShoppingPage shoppingPage = new ShoppingPage(getDriver());
-        shoppingPage.addProductToCart();
+        ShoppingPage shoppingPage = loginPage.login();
+        int expectedAmountOfAddedProducts = new Random().nextInt(5) + 1;
+        shoppingPage.addProductToCart(expectedAmountOfAddedProducts);
 
         shoppingPage.deleteProductsFromCart();
         Assert.assertEquals(shoppingPage.getActualAmountOfAddedProducts()

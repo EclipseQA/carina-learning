@@ -14,10 +14,14 @@ public class LogoutTest implements IAbstractTest {
     public void testLogoutFromShoppingPage() {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.open();
-
-        ShoppingPage shoppingPage = loginPage.loginWithData(
-                R.TESTDATA.get("valid_username"),
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.USERNAME,
+                R.TESTDATA.get("valid_username"));
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.PASSWORD,
                 R.TESTDATA.get("valid_password"));
+
+        ShoppingPage shoppingPage = loginPage.login();
 
         HeaderMenu headerMenu = shoppingPage.switchToHeaderMenu();
         headerMenu.openHeaderMenu();

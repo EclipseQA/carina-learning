@@ -15,11 +15,14 @@ public class LoginTest implements IAbstractTest {
     public void testLoginWithValidCreds() {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.open();
-        loginPage.loginWithData(
-                R.TESTDATA.get("valid_username"),
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.USERNAME,
+                R.TESTDATA.get("valid_username"));
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.PASSWORD,
                 R.TESTDATA.get("valid_password"));
 
-        ShoppingPage shoppingPage = new ShoppingPage(getDriver());
+        ShoppingPage shoppingPage = loginPage.login();
 
         Assert.assertTrue(shoppingPage.isPageOpened());
     }
@@ -29,10 +32,13 @@ public class LoginTest implements IAbstractTest {
     public void testLoginWithInvalidUsername() {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.open();
-        loginPage.loginWithData(
-                R.TESTDATA.get("invalid_username"),
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.USERNAME,
+                R.TESTDATA.get("invalid_username"));
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.PASSWORD,
                 R.TESTDATA.get("valid_password"));
-
+        loginPage.login();
         Assert.assertTrue(loginPage.isErrorMessagePresent());
     }
 
@@ -41,9 +47,13 @@ public class LoginTest implements IAbstractTest {
     public void testLoginBlockedUser() {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.open();
-        loginPage.loginWithData(
-                R.TESTDATA.get("blocked_username"),
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.USERNAME,
+                R.TESTDATA.get("blocked_username"));
+        loginPage.fillLoginInput(
+                LoginPage.LoginField.PASSWORD,
                 R.TESTDATA.get("valid_password"));
+        loginPage.login();
 
         Assert.assertEquals(loginPage.getContainerErrorMessage(),
                 R.TESTDATA.get("warning_message"));

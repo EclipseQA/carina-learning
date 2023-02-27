@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<!--thread-count="2" Config already have-->
+<!-- thread-count="2" Config already have-->
 <suite name="Smoke Test" parallel="tests" >
 
     <test name="Positive Test Login">

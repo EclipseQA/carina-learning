@@ -13,22 +13,24 @@ public class CheckoutFirstStepPage extends AbstractPage {
     @FindBy(id = "cancel")
     private ExtendedWebElement cancelButton;
 
-    @FindBy(id = "first-name")
-    private ExtendedWebElement firstNameField;
-
-    @FindBy(id = "last-name")
-    private ExtendedWebElement lastNameField;
-
-    @FindBy(id = "postal-code")
-    private ExtendedWebElement zipCodeField;
+    @FindBy(id = "%s")
+    private ExtendedWebElement checkoutFieldInput;
 
 
-    public void fillCheckoutInformation(String firstName,
-                                        String lastName,
-                                        String zipCode) {
-        firstNameField.type(firstName);
-        lastNameField.type(lastName);
-        zipCodeField.type(zipCode);
+    public void fillCheckoutInformation(CheckoutField field, String value) {
+        switch (field) {
+            case FIRST_NAME:
+                checkoutFieldInput.format(CheckoutField.FIRST_NAME.getIdOfCheckoutInput()).type(value);
+                break;
+            case LAST_NAME:
+                checkoutFieldInput.format(CheckoutField.LAST_NAME.getIdOfCheckoutInput()).type(value);
+                break;
+            case ZIP_CODE:
+                checkoutFieldInput.format(CheckoutField.ZIP_CODE.getIdOfCheckoutInput()).type(value);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid field: " + field);
+        }
     }
 
     public CheckoutSecondStepPage proceedToSecondStep() {
@@ -38,5 +40,21 @@ public class CheckoutFirstStepPage extends AbstractPage {
 
     public CheckoutFirstStepPage(WebDriver driver) {
         super(driver);
+    }
+
+    public enum CheckoutField {
+        FIRST_NAME("first-name"),
+        LAST_NAME("last-name"),
+        ZIP_CODE("postal-code");
+
+        private String idOfCheckoutInput;
+
+        CheckoutField(String idOfCheckoutInput) {
+            this.idOfCheckoutInput = idOfCheckoutInput;
+        }
+
+        public String getIdOfCheckoutInput() {
+            return idOfCheckoutInput;
+        }
     }
 }

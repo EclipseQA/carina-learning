@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class ShoppingPage extends AbstractPage {
 
@@ -32,7 +31,6 @@ public class ShoppingPage extends AbstractPage {
     private List<ExtendedWebElement> addedProducts;
     @FindBy(id = "react-burger-menu-btn")
     private HeaderMenu headerMenu;
-    private int expectedAmountOfAddedProducts;
 
     public HeaderMenu switchToHeaderMenu() {
         return new HeaderMenu(driver);
@@ -55,10 +53,12 @@ public class ShoppingPage extends AbstractPage {
         return new CartPage(driver);
     }
 
-    public void addProductToCart() {
-        expectedAmountOfAddedProducts = new Random().nextInt(3) + 1;
-        for (int i = 0; i <= expectedAmountOfAddedProducts - 1; i++) {
-            addToCartButtons.get(i).click();
+    public void addProductToCart(int numberOfElementsToAdd) {
+        if (numberOfElementsToAdd > addToCartButtons.size()) {
+            throw new RuntimeException("The number of desired adding elements are greater than the number of elements");
+        }
+        for (int i = 0; i <= numberOfElementsToAdd - 1; i++) {
+            addToCartButtons.get(0).click();
         }
     }
 
@@ -90,15 +90,9 @@ public class ShoppingPage extends AbstractPage {
 
     }
 
-    public int getExpectedAmountOfAddedProducts() {
-        return expectedAmountOfAddedProducts;
-    }
-
-
     public void sortProducts(SortProductsType sortType) {
         filterSortContainer.select(sortType.getSortType());
     }
-
 
     public ShoppingPage(WebDriver driver) {
         super(driver);

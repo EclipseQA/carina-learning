@@ -8,11 +8,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends AbstractPage {
 
-    @FindBy(id = "user-name")
-    private ExtendedWebElement usernameField;
-
-    @FindBy(id = "password")
-    private ExtendedWebElement passwordFiled;
+    @FindBy(id = "%s")
+    private ExtendedWebElement loginInput;
 
     @FindBy(id = "login-button")
     private ExtendedWebElement loginButton;
@@ -20,20 +17,47 @@ public class LoginPage extends AbstractPage {
     @FindBy(className = "error-message-container")
     private ExtendedWebElement errorMessageContainer;
 
-    public ShoppingPage loginWithData(String username, String password){
-        usernameField.type(username);
-        passwordFiled.type(password);
+    public void fillLoginInput(LoginField loginField, String value) {
+        switch (loginField) {
+            case USERNAME:
+                loginInput.format(LoginField.USERNAME.getIdOfField()).type(value);
+                break;
+            case PASSWORD:
+                loginInput.format(LoginField.PASSWORD.getIdOfField()).type(value);
+                break;
+            default:
+                throw new RuntimeException();
+        }
+    }
+
+    public ShoppingPage login() {
         loginButton.click();
         return new ShoppingPage(driver);
     }
 
-    public String getContainerErrorMessage(){
+    public String getContainerErrorMessage() {
         return errorMessageContainer.getText();
     }
 
     public boolean isErrorMessagePresent() {
         return errorMessageContainer.isPresent();
     }
+
+    public enum LoginField {
+        USERNAME("user-name"),
+        PASSWORD("password");
+
+        private String idOfField;
+
+        LoginField(String idOfField) {
+            this.idOfField = idOfField;
+        }
+
+        public String getIdOfField() {
+            return idOfField;
+        }
+    }
+
     public LoginPage(WebDriver driver) {
         super(driver);
         setPageOpeningStrategy(PageOpeningStrategy.BY_URL);
