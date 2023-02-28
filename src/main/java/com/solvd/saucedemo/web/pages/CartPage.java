@@ -28,7 +28,6 @@ public class CartPage extends AbstractPage {
             int indexOfCut = nameToFormat.indexOf("\n");
             String formattedName = nameToFormat.substring(0, indexOfCut);
             listOfNames.add(formattedName);
-            ;
         }
         return listOfNames;
     }

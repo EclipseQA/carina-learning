@@ -62,7 +62,7 @@ public class ShoppingPage extends AbstractPage {
         }
     }
 
-    public void deleteProductsFromCart() {
+    public void deleteAllAddedProductsFromShoppingPage() {
         for (ExtendedWebElement removeButton :
                 removeButtons) {
             removeButton.click();

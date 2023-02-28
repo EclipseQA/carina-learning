@@ -70,8 +70,8 @@ public class ShoppingTest implements IAbstractTest {
         int expectedAmountOfAddedProducts = new Random().nextInt(5) + 1;
         shoppingPage.addProductToCart(expectedAmountOfAddedProducts);
 
-        shoppingPage.deleteProductsFromCart();
+        shoppingPage.deleteAllAddedProductsFromShoppingPage();
         Assert.assertEquals(shoppingPage.getActualAmountOfAddedProducts()
-                , shoppingPage.getActualAmountOfAddedProducts());
+                , 0);
     }
 }

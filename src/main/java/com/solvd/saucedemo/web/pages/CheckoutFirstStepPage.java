@@ -18,19 +18,7 @@ public class CheckoutFirstStepPage extends AbstractPage {
 
 
     public void fillCheckoutInformation(CheckoutField field, String value) {
-        switch (field) {
-            case FIRST_NAME:
-                checkoutFieldInput.format(CheckoutField.FIRST_NAME.getIdOfCheckoutInput()).type(value);
-                break;
-            case LAST_NAME:
-                checkoutFieldInput.format(CheckoutField.LAST_NAME.getIdOfCheckoutInput()).type(value);
-                break;
-            case ZIP_CODE:
-                checkoutFieldInput.format(CheckoutField.ZIP_CODE.getIdOfCheckoutInput()).type(value);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid field: " + field);
-        }
+        checkoutFieldInput.format(field.getIdOfCheckoutInput()).type(value);
     }
 
     public CheckoutSecondStepPage proceedToSecondStep() {

@@ -18,16 +18,7 @@ public class LoginPage extends AbstractPage {
     private ExtendedWebElement errorMessageContainer;
 
     public void fillLoginInput(LoginField loginField, String value) {
-        switch (loginField) {
-            case USERNAME:
-                loginInput.format(LoginField.USERNAME.getIdOfField()).type(value);
-                break;
-            case PASSWORD:
-                loginInput.format(LoginField.PASSWORD.getIdOfField()).type(value);
-                break;
-            default:
-                throw new RuntimeException();
-        }
+        loginInput.format(loginField.getIdOfField()).type(value);
     }
 
     public ShoppingPage login() {
